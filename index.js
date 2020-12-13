@@ -13,6 +13,9 @@ const app = express();
 
 app.use(cors());
 
+// Lectura y parseo del body
+
+app.use(express.json());
 
 // Base de Datos
 
@@ -24,12 +27,25 @@ const puerto = process.env.PORT;
 
 //Rutas
 
-app.get('/', (req, res) => {
-    res.json({
-        ok: true,
-        msg: 'Hola Mundo'
-    });
-});
+app.use('/api/usuarios', require('./routes/usuarios'));
+app.use('/api/login', require('./routes/auth'));
+
+// app.get('/', (req, res) => {
+//     res.json({
+//         ok: true,
+//         msg: 'Hola Mundo'
+//     });
+// });
+
+// app.get('/api/usuarios', (req, res) => {
+//     res.json({
+//         ok: true,
+//         usuarios: [{
+//             id: 123,
+//             nombre: 'Eduardo'
+//         }]
+//     });
+// });
 
 app.listen(puerto, () => {
     console.log('Servidor funcionando en el puerto ', puerto);
