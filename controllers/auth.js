@@ -10,10 +10,11 @@ const login = async(req, res = response) => {
     try {
         //Verificar email
         const usuarioDB = await usuario.findOne({ email });
+        console.log(usuarioDB);
         if (!usuarioDB) {
             return res.json({
                 ok: false,
-                msg: 'Usuario o clave incorrecta'
+                msg: 'Correo no existe en usuarios'
             });
         }
         //Verificar contraseña
@@ -22,7 +23,7 @@ const login = async(req, res = response) => {
         if (!validPassword) {
             return res.json({
                 ok: false,
-                msg: 'Usuario o Clave incorrecta'
+                msg: 'Clave incorrecta'
             });
         }
         //Generar Web Token
